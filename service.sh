@@ -11,6 +11,7 @@ trap ' check_ssh; [[ ! -z "$OUTPUT" ]] && awk "{ print $0, "logged in via SSH" }
 while sleep 5; do
 	check_ssh
 	[[ ! -z "$OUTPUT" ]] && awk '{ print $0, "logged in via SSH" }' <(echo "$OUTPUT") | wall
+	[[ ! -z "$OUTPUT" ]] && logger "$OUTPUT"
 done;
 
 exit 0
