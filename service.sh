@@ -8,10 +8,12 @@ function check_ssh {
 
 trap ' check_ssh; [[ ! -z "$OUTPUT" ]] && awk "{ print $0, "logged in via SSH" }" <(echo "$OUTPUT"); logger SIGUSR1 recieved "$OUTPUT" ' USR1;
 
-while sleep 5; do
+while true; do
 	check_ssh
 	[[ ! -z "$OUTPUT" ]] && awk '{ print $0, "logged in via SSH" }' <(echo "$OUTPUT") | wall
 	[[ ! -z "$OUTPUT" ]] && logger "$OUTPUT"
+	sleep 5 &
+	wait
 done;
 
 exit 0
