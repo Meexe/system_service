@@ -3,12 +3,10 @@ Description=SSH monitoring service
 
 [Service]
 Type=simple
-ExecStart=/home/anton/service/system_service/service.sh
+ExecStart=/usr/lib/ssh-monitoring/service.sh
 Restart=always
-WorkingDirectory=/home/anton
 User=root
 Group=root
-Environment=GOPATH=/home/anton/go
 
 [Install]
 WantedBy=multi-user.target
