@@ -5,3 +5,5 @@ Service for warning users about SSH connections
 
 Members:
 - Чеснов Антон
+- Пак Максим
+
