@@ -1,10 +1,10 @@
 #!/bin/bash
 
-TMP="$( ps auxwww | grep sshd: | grep @ | tr -s ' ' ' ' | cut -d' ' -f12 | cut -d'@' -f12 )";
+TMP="$( netstat -atp | grep 'ESTABLISHED.*sshd' | tr -s ' ' ' ' | cut -d' ' -f8 )";
 function check_ssh { 
-	OUTPUT="$( ps auxwww | grep sshd: | grep @ | tr -s ' ' ' ' | cut -d' ' -f12 | cut -d'@' -f12 )";
+	OUTPUT="$( diff <(echo "$TMP") <(netstat -atp | grep 'ESTABLISHED.*sshd' | tr -s ' ' ' ' | cut -d' ' -f8) | grep ">" )";
 	[[ ! -z "$OUTPUT" ]] && awk '{ print $0, "logged in via SSH" }' <(echo "$OUTPUT") | wall;
-	TMP="$( ps auxwww | grep sshd: | grep @ | tr -s ' ' ' ' | cut -d' ' -f12 | cut -d'@' -f12 )";
+	TMP="$( netstat -atp | grep 'ESTABLISHED.*sshd' | tr -s ' ' ' ' | cut -d' ' -f8 )";
 }
 
 trap 'check_ssh' USR1;
