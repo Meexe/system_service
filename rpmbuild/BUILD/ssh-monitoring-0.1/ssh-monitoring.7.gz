@@ -1,0 +1,33 @@
+'\" t
+.TH "ssh-monitoring.service" "7" "010\ \&MARCH \ \&2019" "ssh-monitoring.service 0.1" "ssh-monitoring.service"
+.TP
+.TP
+.TP
+.SH NAME
+ssh-monitoring
+.TP
+.SH DESCRIPTION
+System service for monitoring connections via SSH. It alarms all users about incoming SSH connections
+.TP
+.SH FILES 
+/usr/lib/ssh-monitoring/service.sh
+.PP
+      /usr/lib/systemd/system/ssh-monitoring.service
+.TP
+.SH AURHORS
+Kozin Yegor, Pak Maxism, Petraki Alexander, Chesnov Anton, Churilov Ivan
+.TP
+.SH STANDART
+Licence GPL-v3+
+.TP
+.SH NOTIFICATIONS
+Use it at your own risk
+.TP
+.SH SEE ALSO
+systemctl(1)
+.TP
+ 
+
+
+
+
