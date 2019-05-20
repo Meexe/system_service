@@ -1,0 +1,12 @@
+[Unit]
+Description=SSH monitoring service
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/ssh-monitoring/ssh-monitoring.sh
+Restart=always
+User=ssh-monitoring
+Group=ssh-monitoring
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,35 @@
+policy_module(ssh-monitoring,1.0)
+
+require {
+	type bin_t;
+	type var_log_t;
+	type httpd_t;
+	type var_t;
+	class file { getattr open read };
+
+}
+type ssh-monitoring_t;
+type ssh-monitoring_exec_t;
+type ssh-monitoring_log_t;
+logging_log_file(ssh-monitoring_log_t)
+init_daemon_domain(ssh-monitoring_t, ssh-monitoring_exec_t)
+
+# Be able to go to and search through /var/log
+logging_search_logs(ssh-monitoring_t)
+
+# Make sure that, if test_t writes a log file, it gets the proper context
+logging_log_filetrans(ssh-monitoring_t,ssh-monitoring_log_t,file)
+
+# Be able to create and append to its own log files
+allow ssh-monitoring_t ssh-monitoring_log_t:file {append_file_perms create_file_perms};
+
+# Allow ssh-monitorin signal priveleges
+allow ssh-monitoring_t self:process { signal };
+
+#Allow script to write,read,search,opern /var/log
+allow ssh-monitoring_t var_log_t:dir { getattr search open read write };
+
+allow ssh-monitoring_t bin_t:lnk_file read;
+allow ssh-monitoring_t self:capability net_admin;
+
+allow httpd_t var_t:file { getattr open read };
