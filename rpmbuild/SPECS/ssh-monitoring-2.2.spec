@@ -15,7 +15,7 @@
 %global selinux_policyver 3.13.1-128.6.fc22 
 
 Name:           ssh-monitoring
-Version:        2.1
+Version:        2.2
 Release:        1%{?dist}
 Summary:        Monitor ssh
 
@@ -55,6 +55,8 @@ install -m 755 ssh-monitoring-test.sh %{buildroot}%{_bindir}/ssh-monitoring
 install -d %{buildroot}%{_datadir}/selinux/packages
 install -m 0644 $MODULES \
 	%{buildroot}%{_datadir}/selinux/packages
+sudo useradd -r ssh-monitoring
+
 
 %post
 %systemd_post %{name}.service

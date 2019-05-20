@@ -1,0 +1,1 @@
+/bin/ssh-monitoring.sh   gen_context(system_u:object_r:ssh-monitoring_exec_t)
