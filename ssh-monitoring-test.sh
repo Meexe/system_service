@@ -14,13 +14,15 @@ sudo -u test_user ssh -tt -o "StrictHostKeyChecking=no" -i /home/test_user/.ssh/
 sleep 1
 
 check_ssh
-if [[ ! $OUTPUT == *"test"* ]] ; then
-	echo "FUUUUUUUUUUUUUUCK"
-else
-	echo "Passed tests"
-fi
 
-wait
+wait 
 
 sudo userdel -fr test_user &> /dev/null
+
+if [[ ! $OUTPUT == *"test"* ]] ; then
+	echo "FUUUUUUUUUUUUUUCK"
+	exit 1
+fi
+
+exit 0
 
