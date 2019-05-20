@@ -13,7 +13,7 @@ logging_search_logs(ssh-monitoring_t)
 logging_log_filetrans(ssh-monitoring_t,ssh-monitoring_log_t,file)
 
 # Be able to create and append to its own log files
-allow ssh-monitoring_t sh-monitoring_log_t:file {append_file_perms create_file_perms};
+allow ssh-monitoring_t ssh-monitoring_log_t:file {append_file_perms create_file_perms};
 
 # Allow ssh-monitorin signal priveleges
 allow ssh-monitoring_t self:process { signal };
@@ -22,6 +22,6 @@ allow ssh-monitoring_t self:process { signal };
 allow ssh-monitoring_t var_log_t:dir { getattr search open read write };
 
 # Allow user execute ps and netstat (? not needed ?)
-allow user_t bin_t:file { entrypoint };
-allow user_t bin_t:file { execute };
-allow user_t bin_t:process transition;
+#allow user_t bin_t:file { entrypoint };
+#allow user_t bin_t:file { execute };
+#allow user_t bin_t:process transition;
